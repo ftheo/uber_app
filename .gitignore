@@ -1,0 +1,9 @@
+.DS_Store
+*.py[cod]
+*.log
+*.log.*
+venv/
+.idea/
+resources/image0.jpg
+*.conf
+*.pem
