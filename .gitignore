@@ -5,5 +5,4 @@
 venv/
 .idea/
 resources/image0.jpg
-*.conf
 *.pem
