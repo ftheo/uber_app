@@ -35,8 +35,4 @@ def dispatch(app, task_time):
 
 if __name__ == '__main__':
     # app.debug = True
-    port = 80
-    euid = os.geteuid()
-    if euid != 0:
-        port = 5000
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=80)
