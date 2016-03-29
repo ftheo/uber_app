@@ -3,20 +3,25 @@ from flask import request
 from threading import Thread
 import random
 import string
+import socket
+import os
 
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def hello_world():
-    return 'Uber Auto Server'
+    return 'Uber Auto Server: ' + socket.gethostname()
+
 
 @app.route('/dispatch', methods=['GET'])
-def upload_file():
+def dispatch_request():
     task_time = int(request.args.get('time', ''))
     thr = Thread(target=dispatch, args=[app, task_time])
     thr.start()
-    return str(task_time)
+    return 'Uber Auto Server: ' + socket.gethostname() + " with processing time: " + str(task_time), 200
+
 
 def dispatch(app, task_time):
     import time
@@ -25,9 +30,13 @@ def dispatch(app, task_time):
     end_time = int(time.time()) + task_time
     while int(time.time()) < end_time:
         pass
-    print "task " + id + " completed"
+    print "task " + id + " completed", 200
 
 
 if __name__ == '__main__':
     # app.debug = True
-    app.run(host='0.0.0.0', port=80)
+    port = 80
+    euid = os.geteuid()
+    if euid != 0:
+        port = 5000
+    app.run(host='0.0.0.0', port=5000)
