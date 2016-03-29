@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return 'Hello World!'
+    return 'Uber Auto Server'
 
 @app.route('/dispatch', methods=['GET'])
 def upload_file():
@@ -29,5 +29,5 @@ def dispatch(app, task_time):
 
 
 if __name__ == '__main__':
-    app.debug = True
+    # app.debug = True
     app.run(host='0.0.0.0', port=80)
